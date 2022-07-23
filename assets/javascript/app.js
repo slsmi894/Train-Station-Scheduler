@@ -1,15 +1,16 @@
-$(document).ready(function () {
 
+$(document).ready(function () {
+    
     //Initialize Firebase
-    var firebaseConfig = {
-        apiKey: "AIzaSyDsfjzOZIrOSHB5eIChVdd1aAxKtRHaEK4",
-        authDomain: "anewproject-7bdc3.firebaseapp.com",
-        databaseURL: "https://anewproject-7bdc3.firebaseio.com",
-        projectId: "anewproject-7bdc3",
-        storageBucket: "anewproject-7bdc3.appspot.com",
-        messagingSenderId: "167156706154",
-        appId: "1:167156706154:web:dc962d5bd3e732f7d65313"
-    };
+    const firebaseConfig = {
+        apiKey: "AIzaSyC8pZuFwZs8gbyYT-BO_rgtOUoZLzkQeV8",
+        authDomain: "logicjs-68a3a.firebaseapp.com",
+        databaseURL: "https://logicjs-68a3a.firebaseio.com",
+        projectId: "logicjs-68a3a",
+        storageBucket: "logicjs-68a3a.appspot.com",
+        messagingSenderId: "345085506588",
+        appId: "1:345085506588:web:42f681eec2ba414f515bd9"
+      };
     // Initialize Firebase,  //Declaring a variable to store the database info.................
     firebase.initializeApp(firebaseConfig);
 
@@ -81,11 +82,7 @@ $(document).ready(function () {
     database.ref().on("child_added", function (childSnapshot, prevChildKey) {
         console.log("Hello2");
         console.log(childSnapshot.val());
-        //added remove button
-        var updateButton = $("#remBtn").html("<span class='glyphicon glyphicon-edit'></span>").addClass("updateButton").attr("data-index", index).attr("data-key", childSnapshot.key);
-        var removeButton = $("#remBtn").html("<span class='glyphicon glyphicon-remove'></span>").addClass("removeButton").attr("data-index", index).attr("data-key", childSnapshot.key);
-        //adding function for option to remove row
-        /* */
+       
 
         //Store to a variable.......
         var trainNumber = clickCounter++;
@@ -109,7 +106,7 @@ $(document).ready(function () {
         var currentTime = moment();
 
         //Use moment.js to show the difference in time between the first train arrival and the current time...............
-        var diffTime = moment().diff(trainTimeConvert, "minutes");
+        var diffTime = currentTime.diff(trainTimeConvert, "minutes");
         console.log(diffTime);
 
         var remainder = diffTime % trainFrequency;
@@ -123,7 +120,12 @@ $(document).ready(function () {
         var newTrainTime = moment().add(timeRemain, "minutes");
         var newTrainTimeFormat = moment(newTrainTime).format("HH:mm");
 
-
+ //added remove button
+       //var updateButton = $("<button>").html("<span class='glyphicon glyphicon-edit'></span>").addClass("updateButton").attr("data-index", index).attr("data-key", childSnapshot.key);
+        //var removeButton = $("<button>").html("<span class='glyphicon glyphicon-remove'></span>").addClass("removeButton").attr("data-index", index).attr("data-key", childSnapshot.key);
+        //adding function for >option to remove row
+      
+        /* */
 
         //Declaring a variable that will hold the dynamically created rows and table data elements with its values.......
         var row = $(("<tr class = 'tableRow'><td>" + trainNumber + "</td><td>" + trainName + "</td><td>" + trainDestination + "</td><td>" + trainTime + "</td><td>" + trainFrequency + "</td><td>" + newTrainTimeFormat + "</td><td>" + timeRemain + "</td></td>" + removeRow + "</td></tr>"));
@@ -148,4 +150,6 @@ $(document).ready(function () {
 
     $(document).on("click", "Button", editRow);
     $(document).on("click", "Button", removeRow);
+
+ 
 });
